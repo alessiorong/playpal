@@ -85,8 +85,20 @@ public class PlayerStatServiceImpl implements PlayerStatService {
             throw new EntityNotFoundException(PlayerStat.class, statId);
         }
         PlayerStat playerStat = optionalPlayerStat.get();
-        if (value == Increment.ONE.getValue() || value == Increment.TWO.getValue() || value == Increment.THREE.getValue()){
+        if (value == Increment.ONE.getValue()){
             playerStat.setPoints(playerStat.getPoints() + value);
+            playerStat.setFreeThrowMade(playerStat.getFreeThrowMade() + value);
+            playerStat.setFreeThrowAttempted(playerStat.getFreeThrowAttempted() + value);
+            playerStatRepo.save(playerStat);
+        } else if (value == Increment.TWO.getValue()){
+            playerStat.setPoints(playerStat.getPoints() + value);
+            playerStat.setTwoPointsMade(playerStat.getTwoPointsMade() + 1);
+            playerStat.setTwoPointsAttempted(playerStat.getTwoPointsAttempted()+1);
+            playerStatRepo.save(playerStat);
+        } else if (value == Increment.THREE.getValue()){
+            playerStat.setPoints(playerStat.getPoints() + value);
+            playerStat.setThreePointsMade(playerStat.getThreePointsMade()+1);
+            playerStat.setThreePointsAttempted(playerStat.getThreePointsAttempted()+1);
             playerStatRepo.save(playerStat);
         }
     }
@@ -105,14 +117,147 @@ public class PlayerStatServiceImpl implements PlayerStatService {
     }
 
     @Override
-    public void addReboundByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+    public void addOReboundByPlayerStatId(long statId, int value) throws EntityNotFoundException {
         Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
         if (optionalPlayerStat.isEmpty()) {
             throw new EntityNotFoundException(PlayerStat.class, statId);
         }
         PlayerStat playerStat = optionalPlayerStat.get();
         if (value == Increment.ONE.getValue()){
-            playerStat.setRebound(playerStat.getRebound() + value);
+            playerStat.setORebound(playerStat.getORebound() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addDReboundByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setDRebound(playerStat.getDRebound() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addTurnoverByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setTurnover(playerStat.getTurnover() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addStealByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setSteal(playerStat.getSteal() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addBlockByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setBlock(playerStat.getBlock() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addFreeThrowMadeByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setFreeThrowMade(playerStat.getFreeThrowMade() + value);
+            playerStat.setFreeThrowAttempted(playerStat.getFreeThrowAttempted() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addFreeThrowAttemptedByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setFreeThrowAttempted(playerStat.getFreeThrowAttempted() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addTwoPointsMadeByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setTwoPointsMade(playerStat.getTwoPointsMade() + value);
+            playerStat.setTwoPointsAttempted(playerStat.getTwoPointsAttempted() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addTwoPointsAttemptedByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setTwoPointsAttempted(playerStat.getTwoPointsAttempted() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addThreePointsMadeByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setThreePointsMade(playerStat.getThreePointsMade() + value);
+            playerStat.setThreePointsAttempted(playerStat.getThreePointsAttempted() + value);
+            playerStatRepo.save(playerStat);
+        }
+    }
+
+    @Override
+    public void addThreePointsAttemptedByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
+        if (optionalPlayerStat.isEmpty()) {
+            throw new EntityNotFoundException(PlayerStat.class, statId);
+        }
+        PlayerStat playerStat = optionalPlayerStat.get();
+        if (value == Increment.ONE.getValue()){
+            playerStat.setThreePointsAttempted(playerStat.getThreePointsAttempted() + value);
             playerStatRepo.save(playerStat);
         }
     }
@@ -151,7 +296,7 @@ public class PlayerStatServiceImpl implements PlayerStatService {
         }
         PlayerStat playerStat = optionalPlayerStat.get();
         if (value == Increment.ONE.getValue()){
-            playerStat.setRebound(playerStat.getRebound() - value);
+            playerStat.setORebound(playerStat.getORebound() - value);
             playerStatRepo.save(playerStat);
         }
     }
@@ -167,10 +312,10 @@ public class PlayerStatServiceImpl implements PlayerStatService {
     }
 
     @Override
-    public double calculateAverageReboundsForPlayer(long playerId) {
+    public double calculateAverageOReboundsForPlayer(long playerId) {
         List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
         OptionalDouble averageRebound = stats.stream()
-                .mapToInt(PlayerStat::getRebound)
+                .mapToInt(PlayerStat::getORebound)
                 .average();
         return averageRebound.isPresent() ? Math.round(averageRebound.getAsDouble() * 100)/100.0 : 0;
     }

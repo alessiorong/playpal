@@ -110,11 +110,11 @@ public class PlayerController {
         return ResponseEntity.ok(averagePoints);
     }
 
-    @GetMapping("/{playerId}/average-rebound")
+    /*@GetMapping("/{playerId}/average-rebound")
     public ResponseEntity<Double> getAverageRebound(@PathVariable long playerId){
         double averageRebound = playerStatService.calculateAverageReboundsForPlayer(playerId);
         return ResponseEntity.ok(averageRebound);
-    }
+    }*/
 
     @GetMapping("/{playerId}/average-assist")
     public ResponseEntity<Double> getAverageAssist(@PathVariable long playerId){

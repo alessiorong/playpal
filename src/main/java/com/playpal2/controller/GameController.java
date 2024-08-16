@@ -116,10 +116,110 @@ public class GameController {
         }
     }
 
-    @PutMapping("/playerstat/{statId}/add-rebound")
-    public ResponseEntity<?> addRebound(@PathVariable long statId, @RequestParam int value){
+    @PutMapping("/playerstat/{statId}/add-offensive-rebound")
+    public ResponseEntity<?> addORebound(@PathVariable long statId, @RequestParam int value){
         try{
-            playerStatService.addReboundByPlayerStatId(statId, value);
+            playerStatService.addOReboundByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-difensive-rebound")
+    public ResponseEntity<?> addDRebound(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addDReboundByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-turnover")
+    public ResponseEntity<?> addTurnover(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addTurnoverByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-steal")
+    public ResponseEntity<?> addSteal(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addStealByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-block")
+    public ResponseEntity<?> addBlock(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addBlockByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-free-throw-made")
+    public ResponseEntity<?> addFreeThrowMade(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addFreeThrowMadeByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-free-throw-attempted")
+    public ResponseEntity<?> addFreeThrowAttempted(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addFreeThrowAttemptedByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-two-points-made")
+    public ResponseEntity<?> addTwoPointsMade(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addTwoPointsMadeByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-two-points-attempted")
+    public ResponseEntity<?> addTwoPointsAttempted(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addTwoPointsAttemptedByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-three-points-made")
+    public ResponseEntity<?> addThreePointsMade(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addThreePointsMadeByPlayerStatId(statId, value);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/playerstat/{statId}/add-three-points-attempted")
+    public ResponseEntity<?> addThreePointsAttempted(@PathVariable long statId, @RequestParam int value){
+        try{
+            playerStatService.addThreePointsAttemptedByPlayerStatId(statId, value);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
