@@ -30,5 +30,14 @@ public interface PlayerStatService {
     double calculateAveragePointsForPlayer(long playerId);
     double calculateAverageOReboundsForPlayer(long playerId);
     double calculateAverageAssistForPlayer(long playerId);
-
+    double calculateAverageDReboundsForPlayer(long playerId);
+    double calculateAverageStealsForPlayer(long playerId);
+    double calculateAverageTurnoverForPlayer(long playerId);
+    double calculateAverageBlockForPlayer(long playerId);
+    double calculateAverageFreeThrowMadeForPlayer(long playerId);
+    double calculateAverageFreeThrowAttemptedForPlayer(long playerId);
+    double calculateAverageTwoPointsMadeForPlayer(long playerId);
+    double calculateAverageTwoPointsAttemptedForPlayer(long playerId);
+    double calculateAverageThreePointsMadeForPlayer(long playerId);
+    double calculateAverageThreePointsAttemptedForPlayer(long playerId);
 }

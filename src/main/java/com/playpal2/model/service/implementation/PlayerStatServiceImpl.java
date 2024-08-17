@@ -13,6 +13,7 @@ import com.playpal2.model.service.abstraction.PlayerStatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.ClientInfoStatus;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
@@ -314,10 +315,10 @@ public class PlayerStatServiceImpl implements PlayerStatService {
     @Override
     public double calculateAverageOReboundsForPlayer(long playerId) {
         List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
-        OptionalDouble averageRebound = stats.stream()
+        OptionalDouble averageORebound = stats.stream()
                 .mapToInt(PlayerStat::getORebound)
                 .average();
-        return averageRebound.isPresent() ? Math.round(averageRebound.getAsDouble() * 100)/100.0 : 0;
+        return averageORebound.isPresent() ? Math.round(averageORebound.getAsDouble() * 100)/100.0 : 0;
     }
 
     @Override
@@ -327,6 +328,96 @@ public class PlayerStatServiceImpl implements PlayerStatService {
                 .mapToInt(PlayerStat::getAssist)
                 .average();
         return averageAssist.isPresent() ? Math.round(averageAssist.getAsDouble() * 100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageDReboundsForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averageDRebound = stats.stream()
+                .mapToInt(PlayerStat::getDRebound)
+                .average();
+        return averageDRebound.isPresent() ? Math.round(averageDRebound.getAsDouble() * 100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageStealsForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averageSteals = stats.stream()
+                .mapToInt(PlayerStat::getSteal)
+                .average();
+        return averageSteals.isPresent() ? Math.round(averageSteals.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageTurnoverForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averageTurnovers = stats.stream()
+                .mapToInt(PlayerStat::getTurnover)
+                .average();
+        return averageTurnovers.isPresent() ? Math.round(averageTurnovers.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageBlockForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averageBlocks = stats.stream()
+                .mapToInt(PlayerStat::getBlock)
+                .average();
+        return averageBlocks.isPresent() ? Math.round(averageBlocks.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageFreeThrowMadeForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averageFTM = stats.stream()
+                .mapToInt(PlayerStat::getFreeThrowMade)
+                .average();
+        return averageFTM.isPresent() ? Math.round(averageFTM.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageFreeThrowAttemptedForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averageFTA = stats.stream()
+                .mapToInt(PlayerStat::getFreeThrowAttempted)
+                .average();
+        return averageFTA.isPresent() ? Math.round(averageFTA.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageTwoPointsMadeForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averagePM2 = stats.stream()
+                .mapToInt(PlayerStat::getTwoPointsMade)
+                .average();
+        return averagePM2.isPresent() ? Math.round(averagePM2.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageTwoPointsAttemptedForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averagePA2 = stats.stream()
+                .mapToInt(PlayerStat::getTwoPointsAttempted)
+                .average();
+        return averagePA2.isPresent() ? Math.round(averagePA2.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageThreePointsMadeForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averagePM3 = stats.stream()
+                .mapToInt(PlayerStat::getThreePointsMade)
+                .average();
+        return averagePM3.isPresent() ? Math.round(averagePM3.getAsDouble()*100)/100.0 : 0;
+    }
+
+    @Override
+    public double calculateAverageThreePointsAttemptedForPlayer(long playerId) {
+        List<PlayerStat> stats = playerStatRepo.findallByPlayerId(playerId);
+        OptionalDouble averagePA3 = stats.stream()
+                .mapToInt(PlayerStat::getThreePointsAttempted)
+                .average();
+        return averagePA3.isPresent() ? Math.round(averagePA3.getAsDouble()*100)/100.0 : 0;
     }
 
 }
