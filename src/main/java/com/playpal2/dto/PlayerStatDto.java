@@ -1,5 +1,6 @@
 package com.playpal2.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.playpal2.model.entity.PlayerStat;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,9 @@ public class PlayerStatDto {
     private String playerFirstname;
     private String playerLastname;
     private int points;
+    @JsonProperty("oRebound")
     private int oRebound;
+    @JsonProperty("dRebound")
     private int dRebound;
     private int assist;
     private int turnover;
