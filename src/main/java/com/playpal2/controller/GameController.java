@@ -237,7 +237,27 @@ public class GameController {
         }
     }
 
+    @PutMapping("/{gameId}/change-my-final-score")
+    public ResponseEntity<?> updateMyFinalScore(@PathVariable long gameId, @RequestBody Map<String, Integer> request){
+        try {
+            int newScore = request.get("newScore");
+            gameService.updateMyFinalScoreByGameId(gameId, newScore);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
+    @PutMapping("/{gameId}/change-opposite-final-score")
+    public ResponseEntity<?> updateOppositeFinalScore(@PathVariable long gameId, @RequestBody Map<String, Integer> request){
+        try {
+            int newScore = request.get("newScore");
+            gameService.updateOppositeFinalScoreByGameId(gameId, newScore);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 
 

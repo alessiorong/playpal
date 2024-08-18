@@ -12,7 +12,8 @@ public interface GameService {
     void createGame(Game game, long teamId) throws EntityNotFoundException;
     void deleteGameById(long id) throws EntityNotFoundException;
     void updateResultByGameId(long gameId, String result) throws EntityNotFoundException;
-
+    void updateMyFinalScoreByGameId(long gameId, int newScore) throws EntityNotFoundException;
+    void updateOppositeFinalScoreByGameId(long gameId, int newScore) throws EntityNotFoundException;
 
 
 

@@ -1,6 +1,5 @@
 package com.playpal2.model.service.implementation;
 
-import com.playpal2.dto.GameDto;
 import com.playpal2.exceptions.EntityNotFoundException;
 import com.playpal2.model.entity.Game;
 import com.playpal2.model.entity.Team;
@@ -60,6 +59,7 @@ public class GameServiceImpl implements GameService {
         if (game.getResult() == null){
             game.setResult("da giocare");
         }
+
         gameRepo.save(game);
     }
 
@@ -82,6 +82,28 @@ public class GameServiceImpl implements GameService {
         }
         Game game = optionalGame.get();
         game.setResult(result);
+        gameRepo.save(game);
+    }
+
+    @Override
+    public void updateMyFinalScoreByGameId(long gameId, int newScore) throws EntityNotFoundException {
+        Optional<Game> optionalGame = gameRepo.findById(gameId);
+        if (optionalGame.isEmpty()){
+            throw new EntityNotFoundException(Game.class, gameId);
+        }
+        Game game = optionalGame.get();
+        game.setMyFinalScore(newScore);
+        gameRepo.save(game);
+    }
+
+    @Override
+    public void updateOppositeFinalScoreByGameId(long gameId, int newScore) throws EntityNotFoundException {
+        Optional<Game> optionalGame = gameRepo.findById(gameId);
+        if (optionalGame.isEmpty()){
+            throw new EntityNotFoundException(Game.class, gameId);
+        }
+        Game game = optionalGame.get();
+        game.setOppositeFinalScore(newScore);
         gameRepo.save(game);
     }
 

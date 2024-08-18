@@ -17,6 +17,8 @@ public class Game {
 
     private LocalDate gameDay;
     private String oppositeTeam;
+    private int myFinalScore;
+    private int oppositeFinalScore;
     private String result;
 
     @ManyToOne
@@ -28,10 +30,12 @@ public class Game {
 
     public Game() {}
 
-    public Game(long id, LocalDate gameDay, String oppositeTeam, String result) {
+    public Game(long id, LocalDate gameDay, String oppositeTeam, int myFinalScore, int oppositeFinalScore, String result) {
         this.id = id;
         this.gameDay = gameDay;
         this.oppositeTeam = oppositeTeam;
+        this.myFinalScore = myFinalScore;
+        this.oppositeFinalScore = oppositeFinalScore;
         this.result = result;
     }
 }

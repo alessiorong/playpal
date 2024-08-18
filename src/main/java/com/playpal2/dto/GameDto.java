@@ -12,6 +12,8 @@ public class GameDto {
     private long id;
     private String gameDay;
     private String oppositeTeam;
+    private int myFinalScore;
+    private int oppositeFinalScore;
     private String result;
 
     public GameDto() {}
@@ -20,10 +22,12 @@ public class GameDto {
         this.id = game.getId();
         this.gameDay = game.getGameDay().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.oppositeTeam = game.getOppositeTeam();
+        this.myFinalScore = game.getMyFinalScore();
+        this.oppositeFinalScore = game.getOppositeFinalScore();
         this.result = game.getResult();
     }
 
     public Game toGame (){
-        return new Game(this.id, LocalDate.parse(gameDay, DateTimeFormatter.ofPattern("yyyy-MM-dd")), this.oppositeTeam, this.result);
+        return new Game(this.id, LocalDate.parse(gameDay, DateTimeFormatter.ofPattern("yyyy-MM-dd")), this.oppositeTeam, this.myFinalScore, this.oppositeFinalScore, this.result);
     }
 }
