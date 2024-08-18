@@ -3,6 +3,7 @@ package com.playpal2.controller;
 import com.playpal2.dto.PlayerDto;
 import com.playpal2.dto.PlayerStatDto;
 import com.playpal2.exceptions.DuplicatePlayerException;
+import com.playpal2.exceptions.EntityAlreadyExistsException;
 import com.playpal2.exceptions.EntityNotFoundException;
 import com.playpal2.model.entity.Player;
 import com.playpal2.model.entity.PlayerStat;
@@ -15,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 @RestController
@@ -62,14 +65,28 @@ public class PlayerController {
     }
 
     @PostMapping("/{playerId}/add-in-team/{teamId}")
-    public ResponseEntity<?> addPlayerToTeam(@PathVariable long playerId, @PathVariable long teamId){
+    public ResponseEntity<?> addPlayerToTeam(@PathVariable long playerId, @PathVariable long teamId, @RequestBody Map<String, Integer> request){
         try{
-            playerService.addPlayerToTeam(playerId, teamId);
+            int jerseyNumber = request.get("jerseyNumber");
+            playerService.addPlayerToTeam(playerId, teamId, jerseyNumber);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (EntityAlreadyExistsException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    @GetMapping("/team/{teamId}/available-jersey-numbers")
+    public ResponseEntity<List<Integer>> getAvailableJerseyNumbers(@PathVariable long teamId) {
+        try {
+            List<Integer> availableNumbers = playerService.getAvailableJerseyNumbers(teamId);
+            return ResponseEntity.status(HttpStatus.OK).body(availableNumbers);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+        }
+    }
+
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<?> deletePlayerById(@PathVariable long id){

@@ -1,6 +1,7 @@
 package com.playpal2.model.service.implementation;
 
 import com.playpal2.exceptions.DuplicatePlayerException;
+import com.playpal2.exceptions.EntityAlreadyExistsException;
 import com.playpal2.exceptions.EntityNotFoundException;
 import com.playpal2.model.entity.Player;
 import com.playpal2.model.entity.Team;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -55,7 +58,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void addPlayerToTeam(long playerId, long teamId) throws EntityNotFoundException {
+    public void addPlayerToTeam(long playerId, long teamId, int selectedJerseyNumber) throws EntityNotFoundException, EntityAlreadyExistsException {
         Optional<Player> optionalPlayer = playerRepo.findById(playerId);
         Optional<Team> optionalTeam = teamRepo.findById(teamId);
         if (optionalPlayer.isEmpty()){
@@ -66,14 +69,41 @@ public class PlayerServiceImpl implements PlayerService {
         }
         Player player = optionalPlayer.get();
         Team team = optionalTeam.get();
+        List<Integer> availableNumbers = getAvailableJerseyNumbers(team.getId());
+        if (!availableNumbers.contains(selectedJerseyNumber)){
+            throw new EntityAlreadyExistsException();
+        }
+
         if (player.getTeam()!= null){
             player.getTeam().getPlayerList().remove(player);
         }
+        player.setJerseyNumber(selectedJerseyNumber);
         team.getPlayerList().add(player);
         player.setTeam(team);
         teamRepo.save(team);
         playerRepo.save(player);
     }
+
+    @Override
+    public List<Integer> getAvailableJerseyNumbers(long teamId) throws EntityNotFoundException {
+        Optional<Team> optionalTeam = teamRepo.findById(teamId);
+        if (optionalTeam.isEmpty()) {
+            throw new EntityNotFoundException(Team.class, teamId);
+        }
+        Team team = optionalTeam.get();
+        List<Integer> allNumbers = IntStream.rangeClosed(0, 99)
+                .boxed()
+                .collect(Collectors.toList());
+
+        List<Integer> usedNumbers = team.getPlayerList().stream()
+                .map(Player::getJerseyNumber)
+                .toList();
+        allNumbers.removeAll(usedNumbers);
+        return allNumbers;
+    }
+
+
+
 
     @Override
     public void deletePlayerById(long id) throws EntityNotFoundException {
