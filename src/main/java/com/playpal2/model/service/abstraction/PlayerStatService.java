@@ -11,6 +11,7 @@ public interface PlayerStatService {
     PlayerStat createPlayerStatByPlayerId(long playerId) throws EntityNotFoundException;
     void addPlayerStatToGameByGameId(long playerStatId, long gameId) throws EntityNotFoundException, EntityAlreadyExistsException;
     void removePlayerStatByPlayerId(long gameId, long playerStatId) throws EntityNotFoundException;
+    long getTotalGamesPlayed(long playerId);
     void addPointsByPlayerStatId(long statId, int value) throws EntityNotFoundException;
     void addAssistByPlayerStatId(long statId, int value) throws EntityNotFoundException;
     void addOReboundByPlayerStatId(long statId, int value) throws EntityNotFoundException;

@@ -121,6 +121,12 @@ public class PlayerController {
 
     }
 
+    @GetMapping("/{playerId}/total-games-played")
+    public ResponseEntity<Long> getTotalGamesPlayed(@PathVariable long playerId) {
+        long totalGames = playerStatService.getTotalGamesPlayed(playerId);
+        return ResponseEntity.ok(totalGames);
+    }
+
     @GetMapping("/{playerId}/average-points")
     public ResponseEntity<Double> getAveragePoints(@PathVariable long playerId){
         double averagePoints = playerStatService.calculateAveragePointsForPlayer(playerId);

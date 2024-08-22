@@ -88,8 +88,9 @@ public class TeamController {
     }
 
     @GetMapping("/{teamId}/total-games-played")
-    public long getTotalGamesPlayed(@PathVariable long teamId) {
-        return teamService.getTotalGamesPlayed(teamId);
+    public ResponseEntity<Long> getTotalGamesPlayed(@PathVariable long teamId) {
+        long totalGames = teamService.getTotalGamesPlayed(teamId);
+        return ResponseEntity.ok(totalGames);
     }
 
     @GetMapping("/{teamId}/average-points")

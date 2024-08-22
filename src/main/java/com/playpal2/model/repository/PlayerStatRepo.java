@@ -18,4 +18,7 @@ List<PlayerStat> findallByPlayerId(@Param("playerId") long playerId);
 
 Optional<PlayerStat> findByPlayer(Player player);
 List<PlayerStat> findByGame_Id(long gameId);
+
+@Query("SELECT COUNT(p) FROM PlayerStat p WHERE p.player.id = :playerId")
+long countGamesPlayed(long playerId);
 }

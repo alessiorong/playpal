@@ -71,6 +71,11 @@ public class PlayerStatServiceImpl implements PlayerStatService {
     }
 
     @Override
+    public long getTotalGamesPlayed(long playerId) {
+        return playerStatRepo.countGamesPlayed(playerId);
+    }
+
+    @Override
     public void addPlayerStatToGameByGameId(long playerStatId, long gameId) throws EntityNotFoundException, EntityAlreadyExistsException {
         Optional<Game> optionalGame = gameRepo.findById(gameId);
         Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(playerStatId);

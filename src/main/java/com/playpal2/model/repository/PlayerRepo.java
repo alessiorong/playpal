@@ -23,4 +23,5 @@ public interface PlayerRepo extends JpaRepository<Player, Long> {
     @Query("UPDATE Player p SET p.team = null WHERE p.id = :playerId")
     void removePlayerFromTeam(Long playerId);
 
+
 }
