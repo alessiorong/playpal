@@ -54,6 +54,23 @@ public class PlayerStatServiceImpl implements PlayerStatService {
     }
 
     @Override
+    public void removePlayerStatByPlayerId(long gameId, long playerstatId) throws EntityNotFoundException {
+        Optional<Game> optionalGame = gameRepo.findById(gameId);
+        Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(playerstatId);
+        if (optionalGame.isEmpty()){
+            throw new EntityNotFoundException(Game.class, gameId);
+        }
+        if (optionalPlayerStat.isEmpty()){
+            throw new EntityNotFoundException(PlayerStat.class, playerstatId);
+        }
+        Game game = optionalGame.get();
+        PlayerStat playerStat = optionalPlayerStat.get();
+        game.getStats().remove(playerStat);
+        playerStatRepo.delete(playerStat);
+        gameRepo.save(game);
+    }
+
+    @Override
     public void addPlayerStatToGameByGameId(long playerStatId, long gameId) throws EntityNotFoundException, EntityAlreadyExistsException {
         Optional<Game> optionalGame = gameRepo.findById(gameId);
         Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(playerStatId);
@@ -290,7 +307,7 @@ public class PlayerStatServiceImpl implements PlayerStatService {
     }
 
     @Override
-    public void removeRebpundByPlayerStatId(long statId, int value) throws EntityNotFoundException {
+    public void removeReboundByPlayerStatId(long statId, int value) throws EntityNotFoundException {
         Optional<PlayerStat> optionalPlayerStat = playerStatRepo.findById(statId);
         if (optionalPlayerStat.isEmpty()) {
             throw new EntityNotFoundException(PlayerStat.class, statId);

@@ -87,7 +87,82 @@ public class TeamController {
         }
     }
 
+    @GetMapping("/{teamId}/average-points")
+    public ResponseEntity<Double> getAveragePoints(@PathVariable long teamId){
+        double averagePoints = teamService.calculateAveragePointsForTeam(teamId);
+        return ResponseEntity.ok(averagePoints);
+    }
 
+    @GetMapping("/{teamId}/average-offensive-rebounds")
+    public ResponseEntity<Double> getAverageOffRebounds(@PathVariable long teamId){
+        double averageOffRebounds = teamService.calculateAverageOReboundsForTeam(teamId);
+        return ResponseEntity.ok(averageOffRebounds);
+    }
 
+    @GetMapping("/{teamId}/average-assist")
+    public ResponseEntity<Double> getAverageAssist(@PathVariable long teamId){
+        double averageAssist = teamService.calculateAverageAssistForTeam(teamId);
+        return ResponseEntity.ok(averageAssist);
+    }
+
+    @GetMapping("/{teamId}/average-defensive-rebounds")
+    public ResponseEntity<Double> getAverageDefRebounds(@PathVariable long teamId){
+        double averageDefRebounds = teamService.calculateAverageDReboundsForTeam(teamId);
+        return ResponseEntity.ok(averageDefRebounds);
+    }
+
+    @GetMapping("/{teamId}/average-steals")
+    public ResponseEntity<Double> getAverageSteals(@PathVariable long teamId){
+        double averageSteals = teamService.calculateAverageStealsForTeam(teamId);
+        return ResponseEntity.ok(averageSteals);
+    }
+
+    @GetMapping("/{teamId}/average-turnovers")
+    public ResponseEntity<Double> getAverageTurnovers(@PathVariable long teamId){
+        double averageTurnovers = teamService.calculateAverageTurnoverForTeam(teamId);
+        return ResponseEntity.ok(averageTurnovers);
+    }
+
+    @GetMapping("/{teamId}/average-blocks")
+    public ResponseEntity<Double> getAverageBlocks(@PathVariable long teamId){
+        double averageBlocks = teamService.calculateAverageBlockForTeam(teamId);
+        return ResponseEntity.ok(averageBlocks);
+    }
+
+    @GetMapping("/{teamId}/average-free-throw-made")
+    public ResponseEntity<Double> getAverageFTM(@PathVariable long teamId){
+        double averageFTM = teamService.calculateAverageFreeThrowMadeForTeam(teamId);
+        return ResponseEntity.ok(averageFTM);
+    }
+
+    @GetMapping("/{teamId}/average-free-throw-attempted")
+    public ResponseEntity<Double> getAverageFTA(@PathVariable long teamId){
+        double averageFTA = teamService.calculateAverageFreeThrowAttemptedForTeam(teamId);
+        return ResponseEntity.ok(averageFTA);
+    }
+
+    @GetMapping("/{teamId}/average-two-points-made")
+    public ResponseEntity<Double> getAverageTwoPM(@PathVariable long teamId){
+        double averageTwoPM = teamService.calculateAverageTwoPointsMadeForTeam(teamId);
+        return ResponseEntity.ok(averageTwoPM);
+    }
+
+    @GetMapping("/{teamId}/average-two-points-attempted")
+    public ResponseEntity<Double> getAverageTwoPA(@PathVariable long teamId){
+        double averageTwoPA = teamService.calculateAverageTwoPointsAttemptedForTeam(teamId);
+        return ResponseEntity.ok(averageTwoPA);
+    }
+
+    @GetMapping("/{teamId}/average-three-points-made")
+    public ResponseEntity<Double> getAverageThreePM(@PathVariable long teamId){
+        double averageThreePM = teamService.calculateAverageThreePointsMadeForTeam(teamId);
+        return ResponseEntity.ok(averageThreePM);
+    }
+
+    @GetMapping("/{teamId}/average-three-points-attempted")
+    public ResponseEntity<Double> getAverageThreePA(@PathVariable long teamId){
+        double averageThreePA = teamService.calculateAverageThreePointsAttemptedForTeam(teamId);
+        return ResponseEntity.ok(averageThreePA);
+    }
 
 }

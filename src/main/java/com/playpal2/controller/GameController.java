@@ -96,6 +96,16 @@ public class GameController {
         }
     }
 
+    @DeleteMapping("/{gameId}/remove-playerstat/{playerStatId}")
+    public ResponseEntity<?> removePlayerStatToGame(@PathVariable long playerStatId, @PathVariable long gameId){
+        try {
+            playerStatService.removePlayerStatByPlayerId(gameId, playerStatId);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @PutMapping("/playerstat/{statId}/add-points")
     public ResponseEntity<?> addPoints(@PathVariable long statId, @RequestParam int value){
         try {
