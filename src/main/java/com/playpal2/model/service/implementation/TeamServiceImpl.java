@@ -280,4 +280,9 @@ public class TeamServiceImpl implements TeamService {
         }
         return totalGames > 0 ? totalThreePA/totalGames : 0;
     }
+
+    @Override
+    public long getTotalGamesPlayed(long teamId) {
+        return teamRepo.countGamesByTeamId(teamId);
+    }
 }

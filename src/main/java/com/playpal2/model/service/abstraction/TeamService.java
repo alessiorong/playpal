@@ -2,7 +2,6 @@ package com.playpal2.model.service.abstraction;
 
 import com.playpal2.exceptions.CategoryTeamException;
 import com.playpal2.exceptions.EntityNotFoundException;
-import com.playpal2.model.entity.Game;
 import com.playpal2.model.entity.Team;
 
 import java.util.List;
@@ -28,4 +27,5 @@ public interface TeamService {
     double calculateAverageTwoPointsAttemptedForTeam(long teamId);
     double calculateAverageThreePointsMadeForTeam(long teamId);
     double calculateAverageThreePointsAttemptedForTeam(long teamId);
+    long getTotalGamesPlayed(long teamId);
 }

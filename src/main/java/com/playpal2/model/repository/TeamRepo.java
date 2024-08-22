@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface TeamRepo extends JpaRepository<Team, Long> {
     @Query("SELECT CASE WHEN COUNT(t) > 0 THEN true ELSE false END FROM Team t WHERE LOWER(t.name) = LOWER(?1)")
     boolean existsByName(String name);
+
+    @Query("SELECT COUNT(g) FROM Game g WHERE g.ourTeam.id = :teamId")
+    long countGamesByTeamId(long teamId);
 }
